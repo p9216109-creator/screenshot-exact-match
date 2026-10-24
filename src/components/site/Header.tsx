@@ -67,8 +67,8 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <a href={`tel:${SITE.phones[0].tel}`} className="hidden items-center gap-2 text-sm font-medium xl:flex">
-              <Phone className="h-4 w-4 text-primary" /> {SITE.phones[0].label}
+            <a href={`tel:${SITE.phones[0]!.tel}`} className="hidden items-center gap-2 text-sm font-medium xl:flex">
+              <Phone className="h-4 w-4 text-primary" /> {SITE.phones[0]!.label}
             </a>
             <Button variant="hero" onClick={() => openDemo()} className="hidden sm:inline-flex">Book a Free Demo</Button>
             <button onClick={() => setOpen(true)} className="rounded-full p-2 lg:hidden" aria-label="Open menu" aria-expanded={open}>
@@ -95,7 +95,7 @@ export function Header() {
             </nav>
             <div className="mt-auto grid gap-3 pt-8">
               <Button variant="hero" size="lg" onClick={() => { setOpen(false); openDemo(); }}>Book a Free Demo</Button>
-              <Button variant="outline" size="lg" asChild><a href={`tel:${SITE.phones[0].tel}`}><Phone /> Call {SITE.phones[0].label}</a></Button>
+              <Button variant="outline" size="lg" asChild><a href={`tel:${SITE.phones[0]!.tel}`}><Phone /> Call {SITE.phones[0]!.label}</a></Button>
             </div>
           </div>
         </div>
