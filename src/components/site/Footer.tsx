@@ -19,14 +19,14 @@ export function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-widest text-primary-glow">Explore</h3>
           <ul className="mt-4 space-y-2 text-sm text-ink-foreground/80">
-            {[
+            {([
               ["/about", "About Us"],
               ["/courses", "Courses"],
               ["/projects", "Student Projects"],
               ["/workshops", "Workshops"],
               ["/placements", "Placements & Careers"],
               ["/contact", "Contact"],
-            ].map(([to, l]) => (
+            ] as const).map(([to, l]) => (
               <li key={to}><Link to={to} className="hover:text-primary-glow">{l}</Link></li>
             ))}
           </ul>

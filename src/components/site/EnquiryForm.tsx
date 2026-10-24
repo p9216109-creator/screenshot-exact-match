@@ -31,7 +31,7 @@ type Kind = "enquiry" | "demo" | "workshop";
 const field =
   "w-full rounded-xl border border-input bg-card px-4 py-3 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20";
 
-export function EnquiryForm({ kind = "enquiry", defaultCourse, compact }: { kind?: Kind; defaultCourse?: string; compact?: boolean }) {
+export function EnquiryForm({ kind = "enquiry", defaultCourse, compact }: { kind?: Kind; defaultCourse?: string | undefined; compact?: boolean }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
 
@@ -58,7 +58,7 @@ export function EnquiryForm({ kind = "enquiry", defaultCourse, compact }: { kind
     }
     setErrors({});
     setState("sending");
-    const { error } = await supabase.from("enquiries").insert({ ...parsed.data, kind, status: "new" });
+    const { error } = await supabase.from("enquiries").insert({ ...parsed.data, email: parsed.data.email ?? null, mode: parsed.data.mode ?? null, message: parsed.data.message ?? null, kind, status: "new" });
     setState(error ? "error" : "done");
   }
 
@@ -85,12 +85,12 @@ export function EnquiryForm({ kind = "enquiry", defaultCourse, compact }: { kind
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <div>
         <label htmlFor={`${kind}-name`} className="mb-1.5 block text-sm font-medium">Full name *</label>
-        <input id={`${kind}-name`} name="full_name" autoComplete="name" className={field} aria-invalid={!!errors.full_name} />
+        <input id={`${kind}-name`} name="full_name" autoComplete="name" className={field} aria-invalid={!!errors["full_name"]} />
         {err("full_name")}
       </div>
       <div>
         <label htmlFor={`${kind}-mobile`} className="mb-1.5 block text-sm font-medium">Mobile number *</label>
-        <input id={`${kind}-mobile`} name="mobile" type="tel" inputMode="tel" autoComplete="tel" placeholder="98765 43210" className={field} aria-invalid={!!errors.mobile} />
+        <input id={`${kind}-mobile`} name="mobile" type="tel" inputMode="tel" autoComplete="tel" placeholder="98765 43210" className={field} aria-invalid={!!errors["mobile"]} />
         {err("mobile")}
       </div>
       <div>
