@@ -1,6 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PageHero } from "@/components/site/bits";
-export const Route = createFileRoute("/privacy")({
-  head: () => ({ meta: [{ title: "Privacy Policy | MIND Creative School" }, { name: "description", content: "Privacy Policy at MIND Creative School, Mangalore and Udupi." }, { property: "og:title", content: "Privacy Policy | MIND Creative School" }, { property: "og:description", content: "Privacy Policy at MIND Creative School." }] }),
-  component: () => <PageHero eyebrow="MIND Creative School" title="Privacy Policy">This page is being prepared.</PageHero>,
-});
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowUpRight, CalendarDays, Mail, Phone, Quote } from "lucide-react";
+import { PageHero, SectionHead, CourseCard } from "@/components/site/bits";
+import { EnquiryForm } from "@/components/site/EnquiryForm";
+import { Button } from "@/components/ui/button";
+import { SITE, COURSES, TESTIMONIALS, waLink } from "@/lib/site";
+import { pageHead } from "@/lib/seo";
+import hero from "@/assets/hero-3d.jpg";
+export const Route = createFileRoute("/privacy")({ head: () => pageHead("Privacy Policy", "How MIND Creative School uses the details you share through this website."), component: Page });
+function Page() { return <><PageHero eyebrow="MIND Creative School" title="Privacy Policy">How MIND Creative School uses the details you share through this website.</PageHero><section className="container-site"><div className="max-w-3xl space-y-8"><div><h2 className="text-xl font-bold">Information you share</h2><p className="mt-3 text-muted-foreground">Enquiry and demo forms collect your name, mobile number, optional email, course interest, preferred branch, learning mode and any message you provide. Your consent is recorded with your request.</p></div><div><h2 className="text-xl font-bold">How your details are used</h2><p className="mt-3 text-muted-foreground">Your information is used to respond to your enquiry, discuss course options and arrange a requested demo. Enquiries are accessible to authorised institute staff.</p></div><div><h2 className="text-xl font-bold">Your choices</h2><p className="mt-3 text-muted-foreground">Please avoid including sensitive information in your message. You can contact the institute to request correction or deletion of your enquiry or to withdraw permission to contact you.</p></div><div><h2 className="text-xl font-bold">External services</h2><p className="mt-3 text-muted-foreground">WhatsApp and Google Maps links are operated by external providers and are subject to their own privacy policies. Staff sign-in uses secure account services.</p></div><div><h2 className="text-xl font-bold">Contact</h2><a className="mt-3 inline-block text-primary" href={`mailto:${SITE.email}`}>{SITE.email}</a></div></div></section></>; }

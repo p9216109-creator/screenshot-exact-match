@@ -120,7 +120,7 @@
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.025em;
+    letter-spacing: 0;
   }
   :focus-visible {
     outline: 2px solid var(--ring);
@@ -164,7 +164,7 @@
 @utility eyebrow {
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--primary);
 }
@@ -198,4 +198,16 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+:root {
+  --hero-veil: linear-gradient(90deg, var(--background) 0%, var(--background) 27%, color-mix(in oklab, var(--background) 92%, transparent) 39%, color-mix(in oklab, var(--background) 10%, transparent) 65%);
+}
+.home-hero { background: var(--background); }
+.hero-art { object-position: right center; width: 72%; left: auto; }
+.hero-veil { background: var(--hero-veil); }
+@media (max-width: 767px) {
+  .hero-art { width: 100%; opacity: .23; }
+  .hero-veil { background: color-mix(in oklab, var(--background) 55%, transparent); }
+  .home-hero h1 { font-size: 3rem; }
 }

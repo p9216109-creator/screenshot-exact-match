@@ -5,6 +5,7 @@ import type { Course } from "@/lib/site";
 import { waLink } from "@/lib/site";
 import { Tilt } from "./Tilt";
 import { useDemo } from "./demo-context";
+import { Button } from "@/components/ui/button";
 
 export function WhatsAppFab() {
   return (
@@ -23,7 +24,6 @@ export function WhatsAppFab() {
 export function PageHero({ eyebrow, title, children }: { eyebrow: string; title: ReactNode; children?: ReactNode }) {
   return (
     <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-aura" />
       <div className="container-site relative py-16 md:py-24">
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="mt-4 max-w-4xl text-4xl font-bold leading-[1.05] md:text-6xl">{title}</h1>
@@ -38,7 +38,7 @@ export function CourseCard({ course }: { course: Course }) {
   const hours = course.programmes[0]?.duration;
   return (
     <Tilt>
-      <article className="group flex h-full flex-col overflow-hidden rounded-3xl border bg-card shadow-soft transition-shadow hover:shadow-3d">
+      <article className="group flex h-full flex-col overflow-hidden rounded-lg border bg-card shadow-soft transition-shadow hover:shadow-3d">
         <div className="relative aspect-[4/3] overflow-hidden">
           <img src={course.image} alt={`${course.name} at MIND Creative School`} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
           <span className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold backdrop-blur">{course.category}</span>
@@ -53,7 +53,7 @@ export function CourseCard({ course }: { course: Course }) {
             <Link to="/courses/$slug" params={{ slug: course.slug }} className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
               View course <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
-            <button onClick={() => open(course.name)} className="text-sm font-medium text-muted-foreground hover:text-foreground">Enquire now</button>
+            <Button variant="link" size="sm" onClick={() => open(course.name)} className="px-0 text-xs text-muted-foreground">Enquire now</Button>
           </div>
         </div>
       </article>

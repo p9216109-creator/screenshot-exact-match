@@ -17,15 +17,16 @@ const NAV = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const { open: openDemo } = useDemo();
+  const phone = SITE.phones[0];
   return (
     <>
       {ANNOUNCEMENT.enabled && (
         <div className="bg-ink text-ink-foreground">
           <div className="container-site flex items-center justify-center gap-3 py-2 text-center text-xs sm:text-sm">
             <span>{ANNOUNCEMENT.text}</span>
-            <button onClick={() => openDemo()} className="hidden font-semibold text-primary-glow underline-offset-4 hover:underline sm:inline">
+            <Button variant="link" onClick={() => openDemo()} className="hidden h-auto p-0 font-semibold text-primary-glow sm:inline">
               {ANNOUNCEMENT.cta} →
-            </button>
+            </Button>
           </div>
         </div>
       )}
@@ -67,13 +68,13 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <a href={`tel:${SITE.phones[0]!.tel}`} className="hidden items-center gap-2 text-sm font-medium xl:flex">
-              <Phone className="h-4 w-4 text-primary" /> {SITE.phones[0]!.label}
-            </a>
+            {phone && <a href={`tel:${phone.tel}`} className="hidden items-center gap-2 text-sm font-medium 2xl:flex">
+              <Phone className="h-4 w-4 text-primary" /> {phone.label}
+            </a>}
             <Button variant="hero" onClick={() => openDemo()} className="hidden sm:inline-flex">Book a Free Demo</Button>
-            <button onClick={() => setOpen(true)} className="rounded-full p-2 lg:hidden" aria-label="Open menu" aria-expanded={open}>
+            <Button variant="ghost" size="icon" onClick={() => setOpen(true)} className="lg:hidden" aria-label="Open menu" aria-expanded={open}>
               <Menu className="h-6 w-6" />
-            </button>
+            </Button>
           </div>
         </div>
       </header>
@@ -84,7 +85,7 @@ export function Header() {
           <div className="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto bg-background p-6 animate-in slide-in-from-right">
             <div className="flex items-center justify-between">
               <img src={logo.url} alt="MIND Creative School" className="h-10 w-auto" />
-              <button onClick={() => setOpen(false)} aria-label="Close menu" className="rounded-full p-2"><X className="h-6 w-6" /></button>
+              <Button variant="ghost" size="icon" onClick={() => setOpen(false)} aria-label="Close menu"><X className="h-6 w-6" /></Button>
             </div>
             <nav className="mt-8 flex flex-col gap-1 text-lg font-medium" onClick={() => setOpen(false)}>
               <Link to="/" className="rounded-xl px-3 py-3 hover:bg-secondary">Home</Link>
@@ -95,7 +96,7 @@ export function Header() {
             </nav>
             <div className="mt-auto grid gap-3 pt-8">
               <Button variant="hero" size="lg" onClick={() => { setOpen(false); openDemo(); }}>Book a Free Demo</Button>
-              <Button variant="outline" size="lg" asChild><a href={`tel:${SITE.phones[0]!.tel}`}><Phone /> Call {SITE.phones[0]!.label}</a></Button>
+              {phone && <Button variant="outline" size="lg" asChild><a href={`tel:${phone.tel}`}><Phone /> Call {phone.label}</a></Button>}
             </div>
           </div>
         </div>
