@@ -58,8 +58,10 @@ export function EnquiryForm({ kind = "enquiry", defaultCourse, compact }: { kind
     }
     setErrors({});
     setState("sending");
-    const { error } = await supabase.from("enquiries").insert({ ...parsed.data, email: parsed.data.email ?? null, mode: parsed.data.mode ?? null, message: parsed.data.message ?? null, kind, status: "new" });
-    setState(error ? "error" : "done");
+    try {
+      const { error } = await supabase.from("enquiries").insert({ ...parsed.data, email: parsed.data.email ?? null, mode: parsed.data.mode ?? null, message: parsed.data.message ?? null, kind, status: "new" });
+      setState(error ? "error" : "done");
+    } catch { setState("error"); }
   }
 
   if (state === "done")
