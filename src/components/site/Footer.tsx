@@ -6,7 +6,6 @@ import { COURSES, SITE, waLink } from "@/lib/site";
 export function Footer() {
   return (
     <footer className="relative mt-24 overflow-hidden bg-ink text-ink-foreground">
-      <div className="pointer-events-none absolute -right-40 -top-40 h-96 w-96 rounded-full bg-primary/40 blur-3xl" />
       <div className="container-site relative grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="inline-block rounded-2xl bg-card p-3">
