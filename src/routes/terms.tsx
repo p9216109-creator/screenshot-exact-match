@@ -1,6 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PageHero } from "@/components/site/bits";
-export const Route = createFileRoute("/terms")({
-  head: () => ({ meta: [{ title: "Terms & Conditions | MIND Creative School" }, { name: "description", content: "Terms & Conditions at MIND Creative School, Mangalore and Udupi." }, { property: "og:title", content: "Terms & Conditions | MIND Creative School" }, { property: "og:description", content: "Terms & Conditions at MIND Creative School." }] }),
-  component: () => <PageHero eyebrow="MIND Creative School" title="Terms & Conditions">This page is being prepared.</PageHero>,
-});
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowUpRight, CalendarDays, Mail, Phone, Quote } from "lucide-react";
+import { PageHero, SectionHead, CourseCard } from "@/components/site/bits";
+import { EnquiryForm } from "@/components/site/EnquiryForm";
+import { Button } from "@/components/ui/button";
+import { SITE, COURSES, TESTIMONIALS, waLink } from "@/lib/site";
+import { pageHead } from "@/lib/seo";
+import hero from "@/assets/hero-3d.jpg";
+export const Route = createFileRoute("/terms")({ head: () => pageHead("Terms & Conditions", "Course enquiries, admissions information and website terms for MIND Creative School."), component: Page });
+function Page() { return <><PageHero eyebrow="MIND Creative School" title="Terms & Conditions">Course enquiries, admissions information and website terms for MIND Creative School.</PageHero><section className="container-site"><div className="max-w-3xl space-y-8">{[["Course information", "Programme details and hours are provided for reference. Confirm the current syllabus, eligibility, availability and schedule with the institute before enrolling."],["Fees & admissions", "Submitting an enquiry is not an enrolment or a payment. Fees, payment terms, cancellation and refund conditions must be confirmed directly with the institute before admission."],["Free demo requests", "A demo request is subject to confirmation by the institute. Our team will contact you to agree on a suitable time."],["Career assistance", "Career guidance and placement assistance do not constitute a job guarantee. Outcomes depend on individual skills, portfolio, effort and available opportunities."],["Website use", "Use this website for genuine enquiries. Do not submit misleading information or attempt to access another person’s details."]].map(([t,p]) => <div key={t}><h2 className="text-xl font-bold">{t}</h2><p className="mt-3 leading-relaxed text-muted-foreground">{p}</p></div>)}<a className="inline-block text-primary" href={`mailto:${SITE.email}`}>{SITE.email}</a></div></section></>; }

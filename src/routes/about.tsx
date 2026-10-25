@@ -1,6 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PageHero } from "@/components/site/bits";
-export const Route = createFileRoute("/about")({
-  head: () => ({ meta: [{ title: "About Us | MIND Creative School" }, { name: "description", content: "About Us at MIND Creative School, Mangalore and Udupi." }, { property: "og:title", content: "About Us | MIND Creative School" }, { property: "og:description", content: "About Us at MIND Creative School." }] }),
-  component: () => <PageHero eyebrow="MIND Creative School" title="About Us">This page is being prepared.</PageHero>,
-});
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowUpRight, CalendarDays, Mail, Phone, Quote } from "lucide-react";
+import { PageHero, SectionHead, CourseCard } from "@/components/site/bits";
+import { EnquiryForm } from "@/components/site/EnquiryForm";
+import { Button } from "@/components/ui/button";
+import { SITE, COURSES, TESTIMONIALS, waLink } from "@/lib/site";
+import { pageHead } from "@/lib/seo";
+import hero from "@/assets/hero-3d.jpg";
+export const Route = createFileRoute("/about")({ head: () => pageHead("About MIND", "MIND Creative School offers practical, skill-based education in design, animation and digital technology in Mangalore and Udupi."), component: Page });
+function Page() { return <><PageHero eyebrow="MIND Creative School" title="Creative learning. Real possibilities.">MIND Creative School offers practical, skill-based education in design, animation and digital technology in Mangalore and Udupi.</PageHero><section className="container-site grid gap-12 md:grid-cols-2"><div><h2 className="text-3xl font-bold">A place for your ideas to grow.</h2><p className="mt-5 leading-relaxed text-muted-foreground">Our courses bring together creative thinking, professional software and practical work. Whether you are discovering an interest, changing direction or developing a new skill, MIND offers a supportive environment for your next step.</p><p className="mt-4 leading-relaxed text-muted-foreground">Explore interior design, fashion design, graphic design and animation, video editing, web development and focused software certificates.</p><Button className="mt-6" asChild><Link to="/courses">Find your course <ArrowUpRight /></Link></Button></div><img src={hero} alt="Design, fashion and digital creative disciplines" className="aspect-[4/3] w-full rounded-lg object-cover" /><div className="md:col-span-2 border-t pt-10"><SectionHead eyebrow="Learning by doing" title="Not just lessons. Experiences." /><div className="mt-8 grid gap-8 sm:grid-cols-3">{["Practical assignments & projects", "Professional tools & software", "Career guidance & portfolio development"].map(t => <h3 key={t} className="text-xl font-semibold">{t}</h3>)}</div></div></section></>; }

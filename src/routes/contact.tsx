@@ -1,6 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PageHero } from "@/components/site/bits";
-export const Route = createFileRoute("/contact")({
-  head: () => ({ meta: [{ title: "Contact | MIND Creative School" }, { name: "description", content: "Contact at MIND Creative School, Mangalore and Udupi." }, { property: "og:title", content: "Contact | MIND Creative School" }, { property: "og:description", content: "Contact at MIND Creative School." }] }),
-  component: () => <PageHero eyebrow="MIND Creative School" title="Contact">This page is being prepared.</PageHero>,
-});
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowUpRight, CalendarDays, Mail, Phone, Quote } from "lucide-react";
+import { PageHero, SectionHead, CourseCard } from "@/components/site/bits";
+import { EnquiryForm } from "@/components/site/EnquiryForm";
+import { Button } from "@/components/ui/button";
+import { SITE, COURSES, TESTIMONIALS, waLink } from "@/lib/site";
+import { pageHead } from "@/lib/seo";
+import hero from "@/assets/hero-3d.jpg";
+export const Route = createFileRoute("/contact")({ head: () => pageHead("Contact", "Contact MIND Creative School for course details, fees, admissions and a free demo in Mangalore or Udupi."), component: Page });
+function Page() { return <><PageHero eyebrow="MIND Creative School" title="Let’s talk about your next chapter.">Contact MIND Creative School for course details, fees, admissions and a free demo in Mangalore or Udupi.</PageHero><section className="container-site grid gap-12 lg:grid-cols-2"><div><h2 className="mb-6 text-2xl font-bold">Send an enquiry</h2><EnquiryForm /></div><div className="space-y-8"><div><h2 className="text-2xl font-bold">Visit MIND</h2>{SITE.branches.map(b => <div className="mt-6" key={b.city}><h3 className="font-bold">{b.city}</h3><p className="mt-2 text-sm text-muted-foreground">{b.verified ? b.address : "Contact our team for Udupi branch directions."}</p>{b.mapUrl && <a className="mt-2 inline-flex text-sm font-semibold text-primary" href={b.mapUrl} target="_blank" rel="noreferrer">Get directions ↗</a>}</div>)}</div><div className="space-y-3 border-t pt-6">{SITE.phones.map(p => <a key={p.tel} href={`tel:${p.tel}`} className="flex items-center gap-3"><Phone className="h-4 w-4 text-primary" />{p.label}</a>)}<a href={`mailto:${SITE.email}`} className="flex items-center gap-3"><Mail className="h-4 w-4 text-primary" />{SITE.email}</a><Button variant="whatsapp" asChild><a href={waLink()} target="_blank" rel="noreferrer">Chat on WhatsApp <ArrowUpRight /></a></Button></div>{SITE.branches[0]?.embed && <iframe title="MIND Creative School Mangalore location" src={SITE.branches[0].embed} className="h-72 w-full rounded-lg border" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />}</div></section></>; }
